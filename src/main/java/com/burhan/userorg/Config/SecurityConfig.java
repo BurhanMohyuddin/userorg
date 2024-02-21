@@ -59,11 +59,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         .antMatchers(HttpMethod.DELETE, "/users/**").hasAnyRole("ADMIN")
                         .antMatchers(HttpMethod.POST, "/users/**").hasAnyRole("ADMIN")
                         .antMatchers(HttpMethod.PUT, "/users/**").hasAnyRole("ADMIN")
-                        // Configuration for OrganizationController
-                        .antMatchers(HttpMethod.DELETE, "/organizations/**").hasAnyRole("ADMIN")
-                        .antMatchers(HttpMethod.POST, "/organizations/**").hasAnyRole("ADMIN")
-                        .antMatchers(HttpMethod.PUT, "/organizations/**").hasAnyRole("ADMIN")
                         .antMatchers(HttpMethod.GET,"/users/{id}").access("@userSecurity.hasUserId(authentication,#id)")
+                        // Configuration for OrganizationController
+                        .antMatchers(HttpMethod.DELETE, "/organization/**").hasAnyRole("ADMIN")
+                        .antMatchers(HttpMethod.POST, "/organization/**").hasAnyRole("ADMIN")
+                        .antMatchers(HttpMethod.PUT, "/organization/**").hasAnyRole("ADMIN")
+
 //                        .anyRequest().authenticated()
                 .and()
                         .exceptionHandling().authenticationEntryPoint(this.jwtAuthenticationEntryPoint)

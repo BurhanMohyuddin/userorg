@@ -130,6 +130,11 @@ public class UsersServiceImpl implements UsersService {
     @Override
     public UpdateResultEntity updateUsers(UsersEntity usersEntity) {
         usersEntity.setCreatedAt(LocalDateTime.now());
+
+        if (usersEntity.getPassword() == null || usersEntity.getPassword().isEmpty()) {
+            throw new ApiException("Password cannot be null or empty");
+        }
+        usersEntity.setPassword(this.passwordEncoder.encode(usersEntity.getPassword()));
         UsersEntity updatedEntity = usersRepository.save(usersEntity);
 
         // Check if the data is updated successfully

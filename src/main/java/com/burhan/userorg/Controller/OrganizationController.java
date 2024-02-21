@@ -6,6 +6,7 @@ import com.burhan.userorg.Entity.UserOrganizationEntity;
 import com.burhan.userorg.Service.OrganizationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -36,11 +37,13 @@ public class OrganizationController {
         return organizationService.findAllUsersById(id);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public OrganizationEntity saveOrganization(@RequestBody OrganizationEntity organizationEntity){
         return organizationService.saveOrganization(organizationEntity);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping
     public ResponseEntity<UpdateResultEntity> updateOrganization(@RequestBody OrganizationEntity organizationEntity){
         UpdateResultEntity result = organizationService.updateOrganization(organizationEntity);
@@ -51,6 +54,7 @@ public class OrganizationController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(result);
         }    }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteOrganization(@PathVariable("id") Long id){
         String response = organizationService.deleteOrganization(id);
