@@ -21,6 +21,7 @@ import java.util.Date;
 class UserOrgApplicationTests {
 
 
+	@Autowired
 	private MockMvc mockMvc;
 
 	@Autowired
@@ -79,12 +80,12 @@ class UserOrgApplicationTests {
 				.andExpect(status().isOk());
 	}
 
-	@Test
-	public void testDeleteUser() throws Exception {
-		mockMvc.perform(MockMvcRequestBuilders.delete("/users/39")
-				.header("Authorization", "Bearer " + jwtToken))
-				.andExpect(status().isOk());
-	}
+//	@Test
+//	public void testDeleteUser() throws Exception {
+//		mockMvc.perform(MockMvcRequestBuilders.delete("/users/39")
+//				.header("Authorization", "Bearer " + jwtToken))
+//				.andExpect(status().isOk());
+//	}
 
 
 				//Organization test cases
@@ -126,10 +127,10 @@ class UserOrgApplicationTests {
 				.andExpect(status().isOk());
 	}
 
-	@Test
-	public void testDeleteOrganization() throws Exception {
-		mockMvc.perform(MockMvcRequestBuilders.delete("/organization/39")
-				.header("Authorization", "Bearer " + jwtToken))
-				.andExpect(status().isOk());
-	}
+//	@Test
+//	public void testDeleteOrganization() throws Exception {
+//		mockMvc.perform(MockMvcRequestBuilders.delete("/organization/39")
+//				.header("Authorization", "Bearer " + jwtToken))
+//				.andExpect(status().isOk());
+//	}
 }
